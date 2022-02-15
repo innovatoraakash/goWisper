@@ -1,13 +1,26 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:go_wisper/screens/chatPage.dart';
 import 'chatPage.dart';
 import 'settingPage.dart';
+import 'groupChat.dart';
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
+  @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  Widget homepage = ChatPage();
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        drawer: settingPage(),
         appBar: AppBar(
+          backgroundColor: Color(0xffF6F9FF),
+          shadowColor: Colors.white30,
           title: Text(
             'CHATS',
             style: TextStyle(
@@ -16,52 +29,36 @@ class HomePage extends StatelessWidget {
               fontSize: 32,
             ),
           ),
-          actions: [
-            Container(
-              margin: EdgeInsets.only(right: 10),
-              padding: EdgeInsets.symmetric(vertical: 5, horizontal: 13.0),
-              decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(20),
-                  color: Colors.blueAccent),
-              child: Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.add,
-                    color: Colors.black,
-                    size: 20,
-                  ),
-                  SizedBox(
-                    width: 5,
-                  ),
-                  Text('Add')
-                ],
-              ),
-            )
-          ],
         ),
         body: Container(
-          child: ChatPage(),
+          child: homepage,
         ),
         bottomNavigationBar: BottomNavigationBar(
+          currentIndex: index,
           onTap: (int index) {
-            if (index == 1) {
-              Navigator.push(
-                context,
-                MaterialPageRoute(builder: (context) => settingPage()),
-              );
-            }
+            setState(() {
+              this.index = index;
+              index == 1 ? homepage = groupChat() : homepage = ChatPage();
+            });
           },
           selectedItemColor: Colors.blue,
           unselectedItemColor: Colors.grey.shade800,
-          selectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
-          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w600),
+          selectedLabelStyle: TextStyle(
+            fontWeight: FontWeight.w600,
+          ),
+          unselectedLabelStyle: TextStyle(fontWeight: FontWeight.w400),
           type: BottomNavigationBarType.fixed,
           items: [
-            BottomNavigationBarItem(icon: Icon(Icons.message), label: 'chats'),
             BottomNavigationBarItem(
-                icon: Icon(Icons.settings),
-                label: 'setting',
-                activeIcon: settingPage()),
+              icon: Icon(Icons.message),
+              label: 'chats',
+              // activeIcon: Text('activated')
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.group_rounded),
+              label: 'groups',
+              // activeIcon: settingPage()
+            ),
           ],
         ));
   }

@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'homePage.dart';
@@ -13,7 +11,7 @@ const users = const {
 };
 
 class LoginScreen extends StatelessWidget {
-  Duration get loginTime => Duration(milliseconds: 2250);
+  Duration get loginTime => Duration(milliseconds: 1250);
 
   Future<String> _authUser(LoginData data) {
     print('Name: ${data.name}, Password: ${data.password}');

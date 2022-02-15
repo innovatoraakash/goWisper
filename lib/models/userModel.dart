@@ -5,9 +5,11 @@ class ChatUsers {
   String messageText;
   String imageURL;
   String time;
+  String isGroup;
   ChatUsers(
       {@required this.name,
       @required this.messageText,
       @required this.imageURL,
-      @required this.time});
+      @required this.time,
+      this.isGroup});
 }

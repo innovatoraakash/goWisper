@@ -31,48 +31,21 @@ class _ConversationListState extends State<ConversationList> {
                 settings: RouteSettings(arguments: widget)));
       },
       child: Container(
-        padding: EdgeInsets.symmetric(horizontal: 20, vertical: 15),
-        child: Row(
-          children: <Widget>[
-            Expanded(
-              child: Row(
-                children: <Widget>[
-                  CircleAvatar(
-                    backgroundImage: NetworkImage(widget.imageUrl),
-                    maxRadius: 30,
-                  ),
-                  SizedBox(
-                    width: 15,
-                  ),
-                  Container(
-                    color: Colors.transparent,
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        Text(
-                          widget.name,
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontSize: 17,
-                              fontWeight: FontWeight.w800),
-                        ),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        Text(
-                          widget.messageText,
-                          style: TextStyle(
-                              fontWeight: FontWeight.w600,
-                              fontSize: 13,
-                              color: Colors.black87),
-                        )
-                      ],
-                    ),
-                  )
-                ],
-              ),
+        padding: EdgeInsets.symmetric(horizontal: 2, vertical: 4),
+        child: Expanded(
+          child: ListTile(
+            leading: CircleAvatar(
+              backgroundImage: AssetImage(widget.imageUrl),
+              maxRadius: 30,
             ),
-            Text(
+            title: Text(
+              widget.name,
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 17,
+                  fontWeight: FontWeight.w800),
+            ),
+            trailing: Text(
               widget.time,
               style: TextStyle(
                   fontSize: 12,
@@ -80,7 +53,15 @@ class _ConversationListState extends State<ConversationList> {
                       ? FontWeight.bold
                       : FontWeight.normal),
             ),
-          ],
+            subtitle: Text(
+              widget.messageText,
+              style: TextStyle(
+                  fontWeight: FontWeight.w600,
+                  fontSize: 13,
+                  color: Colors.black87),
+            ),
+            enableFeedback: true,
+          ),
         ),
       ),
     );
