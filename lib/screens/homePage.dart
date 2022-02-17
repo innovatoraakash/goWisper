@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:go_wisper/models/globalVariable.dart' as Glob;
 import 'package:go_wisper/screens/chatPage.dart';
 import 'chatPage.dart';
 import 'settingPage.dart';
@@ -13,6 +14,14 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   Widget homepage = ChatPage();
   int index = 0;
+  @override
+  void initState() {
+    setState(() {
+      Glob.myUserName = 'shiva';
+    });
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {

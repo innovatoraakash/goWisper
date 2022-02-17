@@ -40,6 +40,7 @@ class _ChatPageState extends State<ChatPage> {
                 physics: NeverScrollableScrollPhysics(),
                 itemBuilder: (context, index) {
                   return ConversationList(
+                    userName: chatUsers[index].userName,
                     name: chatUsers[index].name,
                     messageText: chatUsers[index].messageText,
                     imageUrl: chatUsers[index].imageURL,

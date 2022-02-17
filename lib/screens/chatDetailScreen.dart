@@ -5,10 +5,11 @@ import 'package:go_wisper/widget/conversationList.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:go_wisper/widget/ownMessageCard.dart';
 import 'package:go_wisper/widget/replyCard.dart';
+import 'package:go_wisper/models/globalVariable.dart' as Glob;
 
 class ChatDetails extends StatefulWidget {
   ChatDetails({Key key, this.chatData}) : super(key: key);
-  final chatData;
+  final ConversationList chatData;
 
   @override
   _ChatDetailsState createState() => _ChatDetailsState();
@@ -23,30 +24,32 @@ class _ChatDetailsState extends State<ChatDetails> {
   @override
   void initState() {
     print("Connected xa ra?");
+    print(Glob.myUserName);
     super.initState();
     connect();
   }
 
   void connect() {
-    socket = IO.io("http://192.168.1.10:5000", <String, dynamic>{
+    socket = IO.io("http://192.168.1.4:5000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
+
     socket.connect();
-    // socket.emit("signin", widget.chatData.name);
+    socket.emit("signin", widget.chatData.userName);
     socket.onConnect((data) {
       print("Connected");
-      // socket.on("message", (msg) {
-      //   print(msg);
-      //   setMessage("destination", msg["message"]);
-      //   // _scrollController.animateTo(_scrollController.position.maxScrollExtent,
-      //   //     duration: Duration(milliseconds: 300), curve: Curves.easeOut);
-      // });
+      socket.on("message", (msg) {
+        print(msg);
+        setMessage("destination", msg["message"]);
+        _scrollController.animateTo(_scrollController.position.maxScrollExtent,
+            duration: Duration(milliseconds: 300), curve: Curves.easeOut);
+      });
+      print(socket.connected);
     });
-    print(socket.connected);
   }
 
-  void sendMessage(String message, int sourceId, int targetId) {
+  void sendMessage(String message, String sourceId, String targetId) {
     setMessage("source", message);
     socket.emit("message",
         {"message": message, "sourceId": sourceId, "targetId": targetId});
@@ -71,8 +74,14 @@ class _ChatDetailsState extends State<ChatDetails> {
         appBar: AppBar(
           leading: Row(
             children: [
+              InkWell(
+                child: Icon(Icons.arrow_back),
+                onTap: () {
+                  Navigator.pop(context);
+                },
+              ),
               SizedBox(
-                width: 10,
+                width: 8,
               ),
               CircleAvatar(
                 backgroundImage: AssetImage(chatData.imageUrl),
@@ -219,7 +228,17 @@ class _ChatDetailsState extends State<ChatDetails> {
                       width: 10,
                     ),
                     sendButton
-                        ? Icon(Icons.send)
+                        ? InkWell(
+                            child: Icon(Icons.send),
+                            onTap: () {
+                              sendMessage(_controller.text, Glob.myUserName,
+                                  widget.chatData.userName);
+                              setState(() {
+                                _controller.clear();
+                                sendButton = false;
+                              });
+                            },
+                          )
                         : Icon(Icons.cancel_schedule_send),
                   ],
                 ),

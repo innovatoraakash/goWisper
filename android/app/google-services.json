@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "368127864783",
+    "project_id": "gowisper111",
+    "storage_bucket": "gowisper111.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:368127864783:android:608b68589c4cb08f7e2cba",
+        "android_client_info": {
+          "package_name": "com.example.go_wisper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "368127864783-eb6nh6d23h7vhufni9c61f9reacpb1r2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAQmSazAFmkb-7N02TqTSr9MuVVZIVdcfg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "368127864783-eb6nh6d23h7vhufni9c61f9reacpb1r2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

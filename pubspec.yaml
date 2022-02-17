@@ -25,9 +25,11 @@ dependencies:
     sdk: flutter
 
   flutter_login: ^2.1.0
-
-  flutter_session: ^0.1.1
+  camera: ^0.9.4+12
+#  flutter_session: ^0.1.1
   socket_io_client: ^2.0.0-beta.4-nullsafety.0
+  path_provider: ^2.0.9
+  video_player: ^1.0.1
 
 
   # The following adds the Cupertino Icons font to your application.
@@ -58,7 +60,7 @@ flutter:
      - assets/images/userImage5.jpg
      - assets/images/userImage6.jpg
      - assets/images/userImage8.jpg
-     - gowisper.png
+     - assets/images/gowisper.png
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-assets/images/#resolution-aware.

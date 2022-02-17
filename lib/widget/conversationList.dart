@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:go_wisper/screens/chatDetailScreen.dart';
 
 class ConversationList extends StatefulWidget {
+  String userName;
   String name;
   String messageText;
   String imageUrl;
   String time;
   bool isMessageRead;
   ConversationList(
-      {@required this.name,
+      {@required this.userName,
+      @required this.name,
       @required this.messageText,
       @required this.imageUrl,
       @required this.time,
@@ -26,7 +28,9 @@ class _ConversationListState extends State<ConversationList> {
             context,
             MaterialPageRoute(
                 builder: (context) {
-                  return ChatDetails();
+                  return ChatDetails(
+                    chatData: this.widget,
+                  );
                 },
                 settings: RouteSettings(arguments: widget)));
       },

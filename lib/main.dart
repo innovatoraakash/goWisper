@@ -1,14 +1,14 @@
 import 'package:flutter/material.dart';
 import 'screens/homePage.dart';
 import 'screens/loginPage.dart';
-import 'package:flutter_session/flutter_session.dart';
+// import 'package:flutter_session/flutter_session.dart';
 
 void main() {
   runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  dynamic token = FlutterSession().get("token");
+  // dynamic token = FlutterSession().get("token");
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
           // primaryColorDark: Colors.deepPurple,
           primaryColorLight: Color(0xFFC4C4C4)),
       debugShowCheckedModeBanner: false,
-      home: token != null ? HomePage() : LoginScreen(),
+      home: HomePage(),
     );
   }
 }
