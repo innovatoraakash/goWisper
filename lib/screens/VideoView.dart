@@ -65,7 +65,7 @@ class _VideoViewPageState extends State<VideoViewPage> {
             Container(
               width: MediaQuery.of(context).size.width,
               height: MediaQuery.of(context).size.height - 150,
-              child: _controller.value.initialized
+              child: _controller.value.isInitialized
                   ? AspectRatio(
                       aspectRatio: _controller.value.aspectRatio,
                       child: VideoPlayer(_controller),

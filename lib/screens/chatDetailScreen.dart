@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:go_wisper/models/messageModel.dart';
 import 'package:go_wisper/models/userModel.dart';
+import 'package:go_wisper/screens/CameraScreen.dart';
 import 'package:go_wisper/widget/conversationList.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:go_wisper/widget/ownMessageCard.dart';
@@ -188,7 +189,15 @@ class _ChatDetailsState extends State<ChatDetails> {
                         SizedBox(
                           width: 40,
                         ),
-                        Icon(Icons.photo),
+                        InkWell(
+                            onTap: () {
+                              Navigator.push(
+                                context,
+                                MaterialPageRoute(
+                                    builder: (context) => CameraScreen()),
+                              );
+                            },
+                            child: Icon(Icons.camera_alt)),
                         SizedBox(
                           width: 20,
                         ),

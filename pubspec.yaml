@@ -29,7 +29,8 @@ dependencies:
 #  flutter_session: ^0.1.1
   socket_io_client: ^2.0.0-beta.4-nullsafety.0
   path_provider: ^2.0.9
-  video_player: ^1.0.1
+  path:
+  video_player: ^2.2.18
 
 
   # The following adds the Cupertino Icons font to your application.
