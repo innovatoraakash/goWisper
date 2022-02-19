@@ -2,11 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:go_wisper/models/messageModel.dart';
 import 'package:go_wisper/models/userModel.dart';
 import 'package:go_wisper/screens/CameraScreen.dart';
+import 'package:go_wisper/screens/CameraView.dart';
 import 'package:go_wisper/widget/conversationList.dart';
 import 'package:socket_io_client/socket_io_client.dart' as IO;
 import 'package:go_wisper/widget/ownMessageCard.dart';
 import 'package:go_wisper/widget/replyCard.dart';
 import 'package:go_wisper/models/globalVariable.dart' as Glob;
+import 'package:image_picker/image_picker.dart';
 
 class ChatDetails extends StatefulWidget {
   ChatDetails({Key key, this.chatData}) : super(key: key);
@@ -22,6 +24,8 @@ class _ChatDetailsState extends State<ChatDetails> {
   TextEditingController _controller = TextEditingController();
   ScrollController _scrollController = ScrollController();
   IO.Socket socket;
+  ImagePicker _picker = ImagePicker();
+  XFile file;
   @override
   void initState() {
     print("Connected xa ra?");
@@ -185,7 +189,18 @@ class _ChatDetailsState extends State<ChatDetails> {
                         SizedBox(
                           width: 40,
                         ),
-                        Icon(Icons.file_copy_rounded),
+                        InkWell(
+                            onTap: () async {
+                              file = await _picker.pickImage(
+                                  source: ImageSource.gallery);
+                              Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                      builder: (context) => CameraViewPage(
+                                            path: file.path,
+                                          )));
+                            },
+                            child: Icon(Icons.file_copy_rounded)),
                         SizedBox(
                           width: 40,
                         ),
