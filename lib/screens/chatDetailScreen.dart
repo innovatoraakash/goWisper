@@ -9,6 +9,7 @@ import 'package:go_wisper/widget/ownMessageCard.dart';
 import 'package:go_wisper/widget/replyCard.dart';
 import 'package:go_wisper/models/globalVariable.dart' as Glob;
 import 'package:image_picker/image_picker.dart';
+import 'package:giphy_picker/giphy_picker.dart';
 
 class ChatDetails extends StatefulWidget {
   ChatDetails({Key key, this.chatData}) : super(key: key);
@@ -35,7 +36,7 @@ class _ChatDetailsState extends State<ChatDetails> {
   }
 
   void connect() {
-    socket = IO.io("http://192.168.1.4:5000", <String, dynamic>{
+    socket = IO.io("http://192.168.18.28:5000", <String, dynamic>{
       "transports": ["websocket"],
       "autoConnect": false,
     });
@@ -67,9 +68,11 @@ class _ChatDetailsState extends State<ChatDetails> {
         time: DateTime.now().toString().substring(10, 16));
     print(messages);
 
-    setState(() {
-      messages.add(messageModel);
-    });
+    if (mounted) {
+      setState(() {
+        messages.add(messageModel);
+      });
+    }
   }
 
   Widget build(BuildContext context) {
@@ -185,7 +188,13 @@ class _ChatDetailsState extends State<ChatDetails> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Icon(Icons.emoji_emotions),
+                        InkWell(
+                            onTap: () async {
+                              final gif = await GiphyPicker.pickGif(
+                                  context: context,
+                                  apiKey: 'XcW8PHuLvbjS4iprgQAOAoLea8Q5f4SB');
+                            },
+                            child: Icon(Icons.emoji_emotions)),
                         SizedBox(
                           width: 40,
                         ),

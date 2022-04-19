@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class settingPage extends StatefulWidget {
   @override
@@ -33,7 +34,12 @@ class _settingPageState extends State<settingPage> {
             line(160),
             settingTag('Delete Account'),
             line(160),
-            settingTag('Log Out'),
+            InkWell(
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+              },
+              child: settingTag('Log Out'),
+            ),
             line(160),
           ],
         ),
