@@ -56,14 +56,17 @@ class LoginScreen extends StatelessWidget {
     }
   }
 
-  Future<String> _recoverPassword(String name) {
+  Future<String> _recoverPassword(String name) async {
     print('Name: $name');
-    return Future.delayed(loginTime).then((_) {
-      if (!users.containsKey(name)) {
-        return 'Username not exists';
+    try {
+      await _auth.sendPasswordResetEmail(email: name);
+    } on FirebaseAuthException catch (e) {
+      if (e.code == 'user-not-found') {
+        return ('No user found for that email.');
+      } else {
+        return (e.message);
       }
-      return null;
-    });
+    }
   }
 
   @override

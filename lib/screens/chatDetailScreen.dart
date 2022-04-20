@@ -30,7 +30,6 @@ class _ChatDetailsState extends State<ChatDetails> {
   @override
   void initState() {
     print("Connected xa ra?");
-    print(Glob.myUserName);
     super.initState();
     connect();
   }
@@ -264,7 +263,7 @@ class _ChatDetailsState extends State<ChatDetails> {
                         ? InkWell(
                             child: Icon(Icons.send),
                             onTap: () {
-                              sendMessage(_controller.text, Glob.myUserName,
+                              sendMessage(_controller.text, Glob.myUserId,
                                   widget.chatData.userName);
                               setState(() {
                                 _controller.clear();

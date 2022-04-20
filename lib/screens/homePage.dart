@@ -5,6 +5,7 @@ import 'package:go_wisper/screens/chatPage.dart';
 import 'chatPage.dart';
 import 'settingPage.dart';
 import 'groupChat.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -12,14 +13,37 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  User currentUser = FirebaseAuth.instance.currentUser;
+  emailVerification() {
+    showDialog<String>(
+      context: context,
+      builder: (BuildContext context) => AlertDialog(
+        title: const Text('AlertDialog Title'),
+        content: const Text('AlertDialog description'),
+        actions: <Widget>[
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'Cancel'),
+            child: const Text('Cancel'),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, 'OK'),
+            child: const Text('OK'),
+          ),
+        ],
+      ),
+    );
+    // await currentUser.sendEmailVerification();
+  }
+
   Widget homepage = ChatPage();
   int index = 0;
   @override
   void initState() {
     setState(() {
-      Glob.myUserName = 'shiva';
+      Glob.myUserId = currentUser.uid;
     });
-    // TODO: implement initState
+
+    // implement initState
     super.initState();
   }
 

@@ -1,5 +1,5 @@
 // class GlobalVariable {
-String myUserName = '';
+String myUserId;
 
 // GlobalVariable();
 // }
