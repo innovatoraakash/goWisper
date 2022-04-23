@@ -10,6 +10,7 @@ import 'package:go_wisper/widget/replyCard.dart';
 import 'package:go_wisper/models/globalVariable.dart' as Glob;
 import 'package:image_picker/image_picker.dart';
 import 'package:giphy_picker/giphy_picker.dart';
+import 'videoCallScreen.dart';
 
 class ChatDetails extends StatefulWidget {
   ChatDetails({Key key, this.chatData}) : super(key: key);
@@ -110,7 +111,10 @@ class _ChatDetailsState extends State<ChatDetails> {
             Padding(
               padding: const EdgeInsets.only(left: 8.0, right: 5),
               child: InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => videoCall()));
+                },
                 child: Icon(Icons.video_call),
               ),
             ),

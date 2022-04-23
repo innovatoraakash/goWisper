@@ -4,12 +4,12 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'homePage.dart';
 // import 'package:flutter_session/flutter_session.dart';
 
-const users = const {
-  'aakash@gmail.com': '12345',
-  'manish@gmail.com': 'hunter',
-  'x@x.x': 'xyz',
-  '1': '1'
-};
+// const users = const {
+//   'aakash@gmail.com': '12345',
+//   'manish@gmail.com': 'hunter',
+//   'x@x.x': 'xyz',
+//   '1': '1'
+// };
 final _auth = FirebaseAuth.instance;
 String email = '';
 String password = '';
@@ -28,7 +28,11 @@ class LoginScreen extends StatelessWidget {
         return ('No user found for that email.');
       } else if (e.code == 'wrong-password') {
         return ('Wrong password provided for that user.');
+      } else {
+        return (e.message);
       }
+    } catch (e) {
+      return (e);
     }
   }
 
@@ -50,9 +54,11 @@ class LoginScreen extends StatelessWidget {
         print('The password provided is too weak.');
       } else if (e.code == 'email-already-in-use') {
         print('The account already exists for that email.');
+      } else {
+        return (e.message);
       }
     } catch (e) {
-      print(e);
+      return (e);
     }
   }
 
